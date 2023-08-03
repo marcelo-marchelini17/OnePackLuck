@@ -22,20 +22,11 @@ OnePackLuck/
 └── setup.py
 
 ## Instalación
-#### 1. Clona este repositorio o descarga los archivos en tu computadora.
-#### 2. Asegúrate de tener Python instalado (versión 3.6 o superior recomendada).
-#### 3. Desde la línea de comandos, ve al directorio raíz del repositorio.
+Para instalar el paquete, asegúrate de tener Python 3.6 o superior y ejecuta el siguiente comando en la terminal:
 
-## Instalación de Dependencias
-#### Antes de ejecutar el programa, debes instalar las dependencias. Ejecuta el siguiente comando: pip install numpy matplotlib astropy pillow
+pip install OnePackLuck==0.1
 
 ## Uso
-#### Ejecuta el programa desde la línea de comandos con el siguiente comando: python main.py
-
-#### La interfaz gráfica se abrirá y podrás cargar imágenes FITS, ajustar parámetros de procesamiento y ver los resultados.
-
-## Contribuciones
-#### Si deseas contribuir a este proyecto, siéntete libre de hacer un fork del repositorio y enviar un pull request con tus cambios.
 
 ## Licencia
 #### Este proyecto está bajo la Licencia MIT.
