@@ -1,5 +1,3 @@
-# OnePackLuck
-
 ## Procesamiento de Imágenes FITS
 #### Este es un programa de procesamiento de imágenes FITS que incluye una interfaz gráfica para cargar, procesar y guardar imágenes FITS. El programa está escrito en Python y utiliza la biblioteca Tkinter para la interfaz gráfica y NumPy, Matplotlib y Astropy para el procesamiento de imágenes.
 
