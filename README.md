@@ -38,4 +38,4 @@ OnePackLuck/
 #### Si deseas contribuir a este proyecto, siéntete libre de hacer un fork del repositorio y enviar un pull request con tus cambios.
 
 ## Licencia
-#### Este proyecto está bajo la Li
+#### Este proyecto está bajo la Licencia MIT.
