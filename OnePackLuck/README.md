@@ -2,7 +2,7 @@
 #### Este es un programa de procesamiento de imágenes FITS que incluye una interfaz gráfica para cargar, procesar y guardar imágenes FITS. El programa está escrito en Python y utiliza la biblioteca Tkinter para la interfaz gráfica y NumPy, Matplotlib y Astropy para el procesamiento de imágenes.
 
 ## Estructura de Carpetas
-#### La estructura de carpetas y archivos debe ser la siguiente:
+#### La estructura de carpetas y archivos:
 
 imagen_processing_package/
 
