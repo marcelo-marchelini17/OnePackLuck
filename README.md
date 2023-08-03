@@ -1,118 +1,208 @@
 # Softwareproject
 import numpy as np
-from astropy.io import fits
-from astropy.visualization import ZScaleInterval
-from astropy.stats import sigma_clipped_stats
-from scipy.ndimage import median_filter, gaussian_filter
 import matplotlib.pyplot as plt
+from astropy.io import fits
+from PIL import Image
+import tkinter as tk
+from tkinter import filedialog
+
 
 def load_fits_image(file_path):
     """
-    Carga una imagen FITS desde un archivo y devuelve un objeto de imagen.
+    Carga una imagen en formato FITS desde un archivo.
+
+
+    Args:
+        file_path (str): Ruta del archivo FITS.
+
+
+    Returns:
+        numpy.ndarray: Matriz de datos de la imagen FITS.
     """
-    hdulist = fits.open(file_path)
-    image = hdulist[0].data
-    hdulist.close()
-    return image
+    data = fits.getdata(file_path)
+    return data
 
-def save_fits_image(image, file_path):
+
+def save_fits_image(data, file_path):
     """
-    Guarda una imagen FITS en un archivo.
+    Guarda una imagen en formato FITS en un archivo.
+
+
+    Args:
+        data (numpy.ndarray): Matriz de datos de la imagen FITS.
+        file_path (str): Ruta del archivo FITS de salida.
     """
-    hdu = fits.PrimaryHDU(image)
-    hdulist = fits.HDUList([hdu])
-    hdulist.writeto(file_path, overwrite=True)
+    hdu = fits.PrimaryHDU(data)
+    hdu.writeto(file_path, overwrite=True)
 
-def display_image(image):
+
+def load_jpg_image(file_path):
     """
-    Muestra una imagen utilizando matplotlib.
+    Carga una imagen en formato JPG desde un archivo.
+
+
+    Args:
+        file_path (str): Ruta del archivo JPG.
+
+
+    Returns:
+        numpy.ndarray: Matriz de datos de la imagen JPG.
     """
-    plt.imshow(image, cmap='gray')
-    plt.colorbar()
-    plt.show()
+    image = Image.open(file_path)
+    data = np.array(image)
+    return data
 
-def rescale_image(image, scale_range=(0, 1)):
+
+def save_jpg_image(data, file_path):
     """
-    Reescala una imagen en un rango específico.
+    Guarda una imagen en formato JPG en un archivo.
+
+
+    Args:
+        data (numpy.ndarray): Matriz de datos de la imagen JPG.
+        file_path (str): Ruta del archivo JPG de salida.
     """
-    min_val, max_val = scale_range
-    scaled_image = (image - np.min(image)) / (np.max(image) - np.min(image))
-    scaled_image = scaled_image * (max_val - min_val) + min_val
-    return scaled_image
+    image = Image.fromarray(data)
+    image.save(file_path)
 
-def stretch_image(image, stretch='linear', **kwargs):
+
+def apply_noise_reduction(data, threshold):
     """
-    Estira la escala de una imagen para mejorar el contraste visual.
+    Aplica reducción de ruido a una imagen astronómica.
+
+
+    Args:
+        data (numpy.ndarray): Matriz de datos de la imagen.
+        threshold (float): Umbral para la reducción de ruido.
+
+
+    Returns:
+        numpy.ndarray: Imagen con reducción de ruido.
     """
-    interval = ZScaleInterval(**kwargs)
-    vmin, vmax = interval.get_limits(image)
-    stretched_image = interval(image)
-    return stretched_image
+    # Aplicar la reducción de ruido a través de algún algoritmo o filtro específico
+    # Aquí se muestra un ejemplo de reducción de ruido mediante umbralización
+    noise_filtered = np.where(data < threshold, 0, data)
+    return noise_filtered
 
-def apply_median_filter(image, size):
+
+def stack_images(images):
     """
-    Aplica un filtro de mediana a una imagen para reducir el ruido.
+    Apila varias imágenes astronómicas en una sola imagen.
+
+
+    Args:
+        images (list): Lista de imágenes astronómicas (matrices de datos).
+
+
+    Returns:
+        numpy.ndarray: Imagen apilada.
     """
-    filtered_image = median_filter(image, size)
-    return filtered_image
+    stacked_image = np.mean(images, axis=0)
+    return stacked_image
 
-def apply_gaussian_filter(image, sigma):
+
+def remove_gradients(data):
     """
-    Aplica un filtro gaussiano a una imagen para suavizarla.
+    Elimina los gradientes presentes en una imagen astronómica.
+
+
+    Args:
+        data (numpy.ndarray): Matriz de datos de la imagen.
+
+
+    Returns:
+        numpy.ndarray: Imagen con gradientes eliminados.
     """
-    filtered_image = gaussian_filter(image, sigma)
-    return filtered_image
+    # Aplicar algún algoritmo o método para eliminar gradientes
+    # Aquí se muestra un ejemplo simple utilizando una imagen de referencia
+    reference_image = load_fits_image('reference.fits')
+    gradients_removed = data - reference_image
+    return gradients_removed
 
-def subtract_background(image, box_size):
+
+def enhance_resolution(data, factor):
     """
-    Resta el fondo de una imagen utilizando una región de fondo local.
+    Mejora la resolución de una imagen astronómica.
+
+
+    Args:
+        data (numpy.ndarray): Matriz de datos de la imagen.
+        factor (int): Factor de mejora de resolución.
+
+
+    Returns:
+        numpy.ndarray: Imagen con resolución mejorada.
     """
-    mean, median, std = sigma_clipped_stats(image)
-    filtered_image = apply_median_filter(image, box_size)
-    background_subtracted_image = image - filtered_image + median
-    return background_subtracted_image
+    # Aplicar algún algoritmo o técnica para mejorar la resolución
+    # Aquí se muestra un ejemplo simple de aumento de tamaño mediante interpolación
+    enhanced_data = np.kron(data, np.ones((factor, factor)))
+    return enhanced_data
 
-# Ejemplo de uso
-image_path = 'ruta/a/la/imagen.fits'
-image = load_fits_image(image_path)
-display_image(image)
 
-# Opciones de procesamiento
-options = {
-    'rescale': True,
-    'rescale_range': (0, 255),
-    'stretch': 'linear',
-    'stretch_params': {},
-    'median_filter': True,
-    'median_filter_size': 3,
-    'gaussian_filter': False,
-    'gaussian_filter_sigma': 2,
-    'subtract_background': True,
-    'background_box_size': 50
-}
+def enhance_details(data, strength):
+    """
+    Realza los detalles presentes en una imagen astronómica.
 
-# Procesar la imagen
-processed_image = image.copy()
 
-# Reescalar la imagen
-if options.get('rescale'):
-    processed_image = rescale_image(processed_image, scale_range=options['rescale_range'])
+    Args:
+        data (numpy.ndarray): Matriz de datos de la imagen.
+        strength (float): Factor de realce de detalles.
 
-# Estirar la escala de la imagen
-if options.get('stretch'):
-    processed_image = stretch_image(processed_image, stretch=options['stretch'], **options['stretch_params'])
 
-# Aplicar un filtro de mediana
-if options.get('median_filter'):
-    processed_image = apply_median_filter(processed_image, size=options['median_filter_size'])
+    Returns:
+        numpy.ndarray: Imagen con detalles realzados.
+    """
+    # Aplicar algún algoritmo o filtro específico para realzar detalles
+    # Aquí se muestra un ejemplo simple de realce mediante multiplicación por un factor
+    enhanced_data = data * strength
+    return enhanced_data
 
-# Aplicar un filtro gaussiano
-if options.get('gaussian_filter'):
-    processed_image = apply_gaussian_filter(processed_image, sigma=options['gaussian_filter_sigma'])
 
-# Restar el fondo de la imagen
-if options.get('subtract_background'):
-    processed_image = subtract_background(processed_image, box_size=options['background_box_size'])
+def open_file_dialog():
+    """
+    Abre un diálogo de selección de archivo y retorna la ruta del archivo seleccionado.
 
-# Mostrar la imagen procesada
-display_image(processed_image)
+
+    Returns:
+        str: Ruta del archivo seleccionado.
+    """
+    root = tk.Tk()
+    root.withdraw()
+    file_path = filedialog.askopenfilename()
+    return file_path
+
+
+# Ejemplo de uso:
+
+
+# Cargar una imagen FITS
+file_path = open_file_dialog()
+fits_image = load_fits_image(file_path)
+
+
+# Aplicar reducción de ruido
+noise_threshold = 100
+denoised_image = apply_noise_reduction(fits_image, noise_threshold)
+
+
+# Apilar varias imágenes
+stacked_images = [denoised_image, fits_image]
+stacked_image = stack_images(stacked_images)
+
+
+# Eliminar gradientes
+gradients_removed_image = remove_gradients(stacked_image)
+
+
+# Mejorar resolución
+resolution_factor = 2
+enhanced_resolution_image = enhance_resolution(gradients_removed_image, resolution_factor)
+
+
+# Realzar detalles
+details_strength = 1.5
+enhanced_details_image = enhance_details(enhanced_resolution_image, details_strength)
+
+
+# Guardar la imagen procesada
+save_fits_image(enhanced_details_image, 'processed_image.fits')
