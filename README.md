@@ -16,7 +16,7 @@ imagen_processing_package/
 
 ├── setup.py
 
- └── README.md
+└── README.md
 
 ## Instalación
 #### 1. Clona este repositorio o descarga los archivos en tu computadora.
