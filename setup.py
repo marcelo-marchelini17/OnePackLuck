@@ -1,13 +1,13 @@
 from setuptools import setup
 
 setup(
-    name='OnePackLuck',
-    version='0.1',
-    packages=['modulo'],
+    name='procesamiento_imagenes_astro',
+    version='0.1.0',
+    packages=[''],
     install_requires=[
         'numpy',
         'matplotlib',
-        'astropy'
-        # Agrega aquí las dependencias necesarias
+        'astropy',
+        'Pillow'
     ],
 )
