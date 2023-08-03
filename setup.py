@@ -1,9 +1,9 @@
-import setuptools
+from setuptools import setups
 
 with open('README.md', 'r') as fh:
     long_description = fh.read()
 
-setuptools.setup(
+setup(
     name='OnePackLuck',
     version='0.1',
     authors='Marcelo Andrade, Marc Valduz',
