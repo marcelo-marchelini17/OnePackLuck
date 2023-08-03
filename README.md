@@ -7,19 +7,22 @@ import tkinter as tk
 from tkinter import filedialog
 
 
-def load_fits_image(file_path):
+def load_fits_image(file_path, extension_name):
     """
     Carga una imagen en formato FITS desde un archivo.
 
 
     Args:
         file_path (str): Ruta del archivo FITS.
+        extension_name (str): Nombre de la extensión que contiene la imagen.
 
 
     Returns:
         numpy.ndarray: Matriz de datos de la imagen FITS.
     """
-    data = fits.getdata(file_path)
+    hdulist = fits.open(file_path)
+    data = hdulist[extension_name].data
+    hdulist.close()
     return data
 
 
