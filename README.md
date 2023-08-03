@@ -48,34 +48,34 @@ from OnePackLuck.CodeOnePackLuck import (
 )
 
 3. Ahora, puedes utilizar estas funciones en tu código como se muestra a continuación:                                                                                                                                                                                                                                                              
-# Cargar una imagen FITS
+## Cargar una imagen FITS
 fits_image = load_fits_image('ruta_de_la_imagen.fits')
 
-# Aplicar reducción de ruido a la imagen FITS
+## Aplicar reducción de ruido a la imagen FITS
 threshold = 50  # Umbral de ruido
 denoised_image = apply_noise_reduction(fits_image, threshold)
 
-# Mejorar la resolución de la imagen
+## Mejorar la resolución de la imagen
 factor = 2  # Factor de mejora de resolución
 enhanced_image = enhance_resolution(denoised_image, factor)
 
-# Mejorar los detalles de la imagen
+## Mejorar los detalles de la imagen
 strength = 1.5  # Fuerza de mejora de detalles
 enhanced_details_image = enhance_details(enhanced_image, strength)
 
-# Guardar la imagen procesada como FITS
+## Guardar la imagen procesada como FITS
 save_fits_image(enhanced_details_image, 'imagen_procesada.fits')
 
-# Cargar una imagen JPG
+## Cargar una imagen JPG
 jpg_image = load_jpg_image('ruta_de_la_imagen.jpg')
 
-# Aplicar una función de procesamiento específica
+## Aplicar una función de procesamiento específica
 processed_jpg_image = stack_images([jpg_image, enhanced_details_image])
 
-# Guardar la imagen procesada como JPG
+## Guardar la imagen procesada como JPG
 save_jpg_image(processed_jpg_image, 'imagen_procesada.jpg')
 
-# ... y así sucesivamente para otras funciones
+## ... y así sucesivamente para otras funciones
 
 Recuerda reemplazar `'ruta_de_la_imagen.fits'` y `'ruta_de_la_imagen.jpg'` con las rutas adecuadas de tus propias imágenes.
 
