@@ -10,7 +10,7 @@ setuptools.setup(
     description='Paquete para el procesamiento de imágenes astronómicas',
     long_description=long_description,
     long_description_content_type='text/markdown',
-    url='https://github.com/marcelo-marchelini17OnePackLuck',
+    url='https://github.com/marcelo-marchelini17/OnePackLuck',
     packages=setuptools.find_packages(),
     install_requires=[
         'numpy',
