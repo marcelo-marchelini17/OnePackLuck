@@ -21,7 +21,7 @@ OnePackLuck/
 
 └── setup.py
 
-## Instalación y Uso
+## Instalación
 Para instalar el paquete, asegúrate de tener Python 3.6 o superior y ejecuta el siguiente comando en la terminal:
 
 pip install OnePackLuck==0.1
