@@ -26,8 +26,7 @@ Para instalar el paquete, asegúrate de tener Python 3.6 o superior y ejecuta el
 
 pip install OnePackLuck==0.1
 
-## Contribuciones
-#### Si deseas contribuir a este proyecto, siéntete libre de hacer un fork del repositorio y enviar un pull request con tus cambios.
+## Uso
 
 ## Licencia
 #### Este proyecto está bajo la Licencia MIT.
