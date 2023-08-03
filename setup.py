@@ -16,7 +16,8 @@ setuptools.setup(
         'numpy',
         'matplotlib',
         'astropy',
-        'Pillow',
+        'Pillow'
+        'tkinter',
     ],
     classifiers=[
         'Programming Language :: Python :: 3',
