@@ -1,133 +1,38 @@
-# OnePackLuck
-import numpy as np
-import matplotlib.pyplot as plt
-from astropy.io import fits
-from PIL import Image
-import tkinter as tk
-from tkinter import filedialog
-from PIL import ImageTk
-from astropy.coordinates import SkyCoord
-from astropy import units as u
+## Procesamiento de Imágenes FITS
+#### Este es un programa de procesamiento de imágenes FITS que incluye una interfaz gráfica para cargar, procesar y guardar imágenes FITS. El programa está escrito en Python y utiliza la biblioteca Tkinter para la interfaz gráfica y NumPy, Matplotlib y Astropy para el procesamiento de imágenes.
 
-def load_fits_image(file_path, extension_name='PRIMARY'):
-    hdulist = fits.open(file_path)
-    data = hdulist[extension_name].data  # Usa la extensión adecuada
-    hdulist.close()
-    print(data)
-    plt.imshow(data)
-    plt.show()
-    return data
+## Estructura de Carpetas
+#### La estructura de carpetas y archivos debe ser la siguiente:
 
-def save_fits_image(data, file_path):
-    hdu = fits.PrimaryHDU(data)
-    hdu.writeto(file_path, overwrite=True)
+imagen_processing_package/
 
-def load_jpg_image(file_path):
-    image = Image.open(file_path)
-    data = np.array(image)
-    return data
+├── imagen_processing/
 
-def save_jpg_image(data, file_path):
-    image = Image.fromarray(data)
-    image.save(file_path)
+│   ├── __init__.py
 
-def apply_noise_reduction(data, threshold):
-    noise_filtered = np.where(data < threshold, 0, data)
-    return noise_filtered
+│   ├── processing.py
 
-def stack_images(images):
-    stacked_image = np.mean(images, axis=0)
-    return stacked_image
+├── main.py
 
-def remove_gradients(data):
-    reference_image = load_fits_image('reference.fits')
-    gradients_removed = data - reference_image
-    return gradients_removed
+├── setup.py
 
-def enhance_resolution(data, factor):
-    enhanced_data = np.kron(data, np.ones((factor, factor)))
-    return enhanced_data
+└── README.md
 
-def enhance_details(data, strength):
-    enhanced_data = data * strength
-    return enhanced_data
+## Instalación
+#### 1. Clona este repositorio o descarga los archivos en tu computadora.
+#### 2. Asegúrate de tener Python instalado (versión 3.6 o superior recomendada).
+#### 3. Desde la línea de comandos, ve al directorio raíz del repositorio.
 
-def open_file_dialog():
-    root = tk.Tk()
-    root.withdraw()
-    file_path = filedialog.askopenfilename()
-    return file_path
+## Instalación de Dependencias
+#### Antes de ejecutar el programa, debes instalar las dependencias. Ejecuta el siguiente comando: pip install numpy matplotlib astropy pillow
 
-# Crear la ventana principal
-window = tk.Tk()
-window.title("Procesamiento de Imagen FITS")
-window.configure(bg="blue")  # Color de fondo azul
+## Uso
+#### Ejecuta el programa desde la línea de comandos con el siguiente comando: python main.py
 
-# Variables globales
-fits_image = None
-processed_image = None
+#### La interfaz gráfica se abrirá y podrás cargar imágenes FITS, ajustar parámetros de procesamiento y ver los resultados.
 
-# Funciones de los botones
-def open_file():
-    global fits_image, processed_image
-    file_path = filedialog.askopenfilename()
-    fits_image = load_fits_image(file_path)
-    show_image(fits_image)
+## Contribuciones
+#### Si deseas contribuir a este proyecto, siéntete libre de hacer un fork del repositorio y enviar un pull request con tus cambios.
 
-def process_image():
-    global processed_image
-    if fits_image is not None:
-        noise_threshold = float(entry_noise.get())
-        resolution_factor = int(entry_resolution.get())
-        details_strength = float(entry_details.get())
-        denoised_image = apply_noise_reduction(fits_image, noise_threshold)
-        enhanced_resolution_image = enhance_resolution(denoised_image, resolution_factor)
-        enhanced_details_image = enhance_details(enhanced_resolution_image, details_strength)
-        processed_image = enhanced_details_image
-        show_image(processed_image)
-        print("Procesamiento de imagen completado.")
-
-def save_processed_image():
-    global processed_image
-    if processed_image is not None:
-        file_path = filedialog.asksaveasfilename(defaultextension=".fits")
-        save_fits_image(processed_image, file_path)
-        print("Imagen procesada guardada.")
-
-def show_image(image_data):
-    image = ImageTk.PhotoImage(image=Image.fromarray(image_data))
-    image_label.configure(image=image)
-    image_label.image = image
-
-# Botones de la interfaz
-btn_open_file = tk.Button(window, text="Abrir archivo FITS", command=open_file, bg="lightblue")
-btn_open_file.pack(pady=5)
-
-# Parámetros de procesamiento
-params_frame = tk.Frame(window, bg="blue")
-params_frame.pack(pady=10)
-label_noise = tk.Label(params_frame, text="Umbral de ruido:", bg="blue", fg="white")
-label_noise.pack(side="left")
-entry_noise = tk.Entry(params_frame)
-entry_noise.pack(side="left", padx=5)
-label_resolution = tk.Label(params_frame, text="Factor de resolución:", bg="blue", fg="white")
-label_resolution.pack(side="left")
-entry_resolution = tk.Entry(params_frame)
-entry_resolution.pack(side="left", padx=5)
-label_details = tk.Label(params_frame, text="Fuerza de detalles:", bg="blue", fg="white")
-label_details.pack(side="left")
-entry_details = tk.Entry(params_frame)
-entry_details.pack(side="left", padx=5)
-
-# Botones de procesamiento
-btn_process = tk.Button(window, text="Procesar imagen", command=process_image, bg="lightblue")
-btn_process.pack(pady=5)
-btn_save = tk.Button(window, text="Guardar imagen procesada", command=save_processed_image, bg="lightblue")
-btn_save.pack(pady=5)
-
-# Visualización de imagen
-image_label = tk.Label(window, bg="blue")
-image_label.pack(pady=10)
-
-# Ejecutar la interfaz de usuario
-window.mainloop()
+## Licencia
+#### Este proyecto está bajo la Licencia MIT.
