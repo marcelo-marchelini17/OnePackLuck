@@ -4,19 +4,21 @@
 ## Estructura de Carpetas
 #### La estructura de carpetas y archivos debe ser la siguiente:
 
-imagen_processing_package/
+OnePackLuck/
 
-├── imagen_processing/
+├── OnePackLuck/
 
 │   ├── __init__.py
 
-│   ├── processing.py
+│   ├── CodeOnePackLuck.py
 
-├── main.py
+├── pyproject.toml
 
-├── setup.py
+├── LICENSE
 
-└── README.md
+├── README.md
+
+└── setup.py
 
 ## Instalación
 #### 1. Clona este repositorio o descarga los archivos en tu computadora.
