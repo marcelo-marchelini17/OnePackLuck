@@ -31,7 +31,7 @@ Para instalar el paquete, asegúrate de tener Python 3.6 o superior y ejecuta el
 Una vez instalado el paquete "OnePackLuck" que contiene el archivo llamado "CodeOnePackLuck.py". En el que están definidas varias funciones útiles relacionadas con el procesamiento de imágenes. Se puede proseguir a usar el paquete de la siguiente manera: 
 
 1. Primero, asegúrate de que hayas instalado el paquete "OnePackLuck" correctamente utilizando el comando
-   `pip install OnePackLuck==0.1`.
+    `pip install OnePackLuck==0.1`.
 
 3. Luego, en tu script, puedes importar las funciones que necesitas de esta manera:
 
