@@ -53,7 +53,7 @@ Una vez instalado el paquete "OnePackLuck" que contiene el archivo llamado "Code
 `fits_image = load_fits_image('ruta_de_la_imagen.fits')`
 
 ## Aplicar reducción de ruido a la imagen FITS
-`threshold = 50`  # Umbral de ruido
+threshold = 50  # Umbral de ruido
 `denoised_image = apply_noise_reduction(fits_image, threshold)`
 
 ## Mejorar la resolución de la imagen
