@@ -30,10 +30,10 @@ Para instalar el paquete, asegúrate de tener Python 3.6 o superior y ejecuta el
 
 Una vez instalado el paquete "OnePackLuck" que contiene el archivo llamado "CodeOnePackLuck.py". En el que están definidas varias funciones útiles relacionadas con el procesamiento de imágenes. Se puede proseguir a usar el paquete de la siguiente manera: 
 
-1. Primero, asegúrate de que hayas instalado el paquete "OnePackLuck" correctamente utilizando el comando
+## 1. Primero, asegúrate de que hayas instalado el paquete "OnePackLuck" correctamente utilizando el comando
     `pip install OnePackLuck==0.1`.
 
-3. Luego, en tu script, puedes importar las funciones que necesitas de esta manera:
+## 2. Luego, en tu script, puedes importar las funciones que necesitas de esta manera:
 
 `from OnePackLuck.CodeOnePackLuck import (
     load_fits_image,
@@ -48,7 +48,7 @@ Una vez instalado el paquete "OnePackLuck" que contiene el archivo llamado "Code
     open_file_dialog
 )`
 
-3. Ahora, puedes utilizar estas funciones en tu código como se muestra a continuación:                                                                                                                                                                                                                                                              
+## 3. Ahora, puedes utilizar estas funciones en tu código como se muestra a continuación:                                                                                                                                                                                                                                                              
 ## Cargar una imagen FITS
 `fits_image = load_fits_image('ruta_de_la_imagen.fits')`
 
